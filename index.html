@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head> 
+    <meta charset="utf-8">
+    <title>Audio Analyzer WebGL</title>
+    <style>
+body {
+    margin:   0;
+    padding:  0;
+    background: #f6f6f6;
+}
+    </style>
+  </head>
+	  <body>
+	    <script src ="three.min.js"></script>
+	    <script src ="AudioAnalyser.js"></script>
+      <script src ="Sandbox.js"></script>
+      <script>
+var analyser = new AudioAnalyser({
+    src: 'mp3/House.mp3',
+    bufferWidth: 128
+});
+
+function visloop(){
+  requestAnimationFrame(visloop);
+
+  var freqData = analyser.getFrequencyData();
+  console.log(freqData);
+}
+requestAnimationFrame(visloop);    
+	    </script>
+	  </body>
+</html>
