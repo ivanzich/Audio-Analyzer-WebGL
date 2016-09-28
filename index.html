@@ -1,33 +1,43 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-  <head> 
+  <head>
     <meta charset="utf-8">
-    <title>Audio Analyzer WebGL</title>
+    <title>mp3 visualiser</title>
     <style>
 body {
-    margin:   0;
-    padding:  0;
-    background: #f6f6f6;
+    margin: 0;
+    padding: 0;
+    background: green;
 }
     </style>
   </head>
-	  <body>
-	    <script src ="three.min.js"></script>
-	    <script src ="AudioAnalyser.js"></script>
-      <script src ="Sandbox.js"></script>
-      <script>
+  <body>
+    <script src="three.min.js"></script>
+    <script src="Sandbox.js"></script>
+    <script src="AudioAnalyser.js"></script>
+    <script src="Plane.js"></script>
+    <script>
 var analyser = new AudioAnalyser({
-    src: 'mp3/House.mp3',
+    src: 'mp3/house.mp3',
     bufferWidth: 128
 });
-
+var sandbox = new Sandbox();
+var plane = new Plane({
+    width: 64,
+    length: 100
+});
+plane.mesh.position.set(-35, 0, 35);
+sandbox.add(plane.mesh);
 function visloop(){
-  requestAnimationFrame(visloop);
-
-  var freqData = analyser.getFrequencyData();
-  console.log(freqData);
+    requestAnimationFrame(visloop);
+    var freqData = analyser.getFrequencyData();
+    plane.setFirstRow(freqData);
+    plane.smear();
+    sandbox.rotateCamera();
+    sandbox.render();
 }
-requestAnimationFrame(visloop);    
-	    </script>
-	  </body>
+requestAnimationFrame(visloop);
+document.body.appendChild(sandbox.getEl());
+    </script>
+  </body>
 </html>

@@ -2,15 +2,15 @@
 function AudioAnalyser(options){
     this.bufferWidth = options.bufferWidth;
    
-    //his.loadUrl(options.src);
+    this.loadUrl(options.src);
 }
-AudioAnalyser.prototype.loadUrl = function loadUrl(src){
+AudioAnalyser.prototype.loadUrl = function loadUrl(url){
      var xhr = new XMLHttpRequest();
 
+     xhr.open("GET", url, true);
      xhr.responseType = 'arraybuffer';
+     
      xhr.onload = this.onLoadAudio.bind(this, xhr);
-
-     xhr.open('GET', src);
      xhr.send();
 };
 
