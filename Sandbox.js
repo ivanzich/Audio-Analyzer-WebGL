@@ -10,7 +10,7 @@ function Sandbox(){
     this.camera.position.set(-20, 70, -80);
 
     var light = new THREE.DirectionalLight(0xffffff);
-    light.position.set(0, 90, 50);
+    light.position.set(1, 90, 60);
     light.castShadow = true;
     light.shadowDarkness = 0.6;
     this.scene.add(light);
@@ -38,11 +38,11 @@ Sandbox.prototype.getEl = function(){
 };
 
 Sandbox.prototype.rotateCamera = function rotateCamera(){
-    var cameraDistance = 100;
-    var camDelta = this.cameraTicks * 0.01;
+    var cameraDistance = 125;
+    var camDelta = this.cameraTicks * 0.001;
 
     this.camera.position.x = Math.sin(camDelta) * cameraDistance;
     this.camera.position.z = Math.cos(camDelta) * cameraDistance;
-    this.camera.lookAt(new THREE.Vector3(0, 0, 0));
+    this.camera.lookAt(new THREE.Vector3(1, 1, 1));
     this.cameraTicks++;
 };

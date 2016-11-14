@@ -15,27 +15,27 @@ AudioAnalyser.prototype.loadUrl = function loadUrl(url){
 };
 
 AudioAnalyser.prototype.onLoadAudio = function onLoadaudio(xhr){
-	var context = new AudioContext();
-	var analyser = context.createAnalyser();
-	var source = context.createBufferSource();
+    	var context = new AudioContext();
+    	var analyser = context.createAnalyser();
+    	var source = context.createBufferSource();
 
-	analyser.fftSize = this.bufferWidth;
-	analyser.connect(context.destination);
+    	analyser.fftSize = this.bufferWidth;
+    	analyser.connect(context.destination);
 
-	source.connect(analyser);
+    	source.connect(analyser);
 
-  context.decodeAudioData(xhr.response, function(buffer){
-  	   source.buffer = buffer;
-  	   source.start();
+      context.decodeAudioData(xhr.response, function(buffer){
+      	   source.buffer = buffer;
+      	   source.start();
   });
   this.analyser = analyser;
 };
 
 AudioAnalyser.prototype.getFrequencyData = function getFrequencyData(){
-     var frequencyBuffer = new Uint8Array(this.bufferWidth);
+       var frequencyBuffer = new Uint8Array(this.bufferWidth);
 
-     if(this.analyser){
-     	   this.analyser.getByteFrequencyData(frequencyBuffer);
+       if(this.analyser){
+       	   this.analyser.getByteFrequencyData(frequencyBuffer);
      }
-     return frequencyBuffer;
+    return frequencyBuffer;
 };

@@ -9,7 +9,7 @@ function Plane(options){
          this.geometry,
          [
              new THREE.MeshLambertMaterial({
-             	   color: 0x3399ff,
+             	   color: 0x00CC00,
              	   side: THREE.DoubleSide
              }),
              new THREE.MeshBasicMaterial({
